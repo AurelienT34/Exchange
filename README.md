@@ -1,3 +1,5 @@
+#  Création cryptomonnaie à l'aide d'un contrat intelligent en Solidity (smart contract) basé sur le protocole ERC20. Utilisation d'un contrat intelligent audité et sécurisé d'OpenZeppelin.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
