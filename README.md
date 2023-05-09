@@ -1,3 +1,5 @@
+![Wallet](https://github.com/AurelienT34/Solidity/assets/47206310/b4a1c65a-a0ba-46ec-a6fb-d7de292f1a1b)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
