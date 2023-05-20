@@ -1,32 +1,23 @@
-# Mon Projet
+# Projet de vente de cryptomonnaies
 
-Ce projet est une application de vente de cryptomonnaies en pair-à-pair.
-
-## Description
-
-L'application permet aux utilisateurs d'ajouter des ventes de cryptomonnaies avec un prix et une quantité spécifiés. Les autres utilisateurs peuvent consulter la liste des ventes disponibles et effectuer des achats en utilisant leur portefeuille Ethereum.
+Ce projet est une plateforme de vente de cryptomonnaies pair-à-pair (P2P). Il permet aux utilisateurs d'acheter et de vendre des cryptomonnaies directement entre eux, sans passer par une plateforme d'échange centralisée.
 
 ## Fonctionnalités
 
-- Ajouter une vente de cryptomonnaie avec un prix et une quantité
-- Consulter la liste des ventes disponibles
-- Effectuer un achat en utilisant un portefeuille Ethereum
-- Mettre à jour le statut des ventes après un achat
-
-## Installation
-
-1. Clonez le dépôt GitHub : `git clone https://github.com/votre-utilisateur/votre-projet.git`
-2. Accédez au répertoire du projet : `cd votre-projet`
-3. Installez les dépendances : `npm install`
-4. Lancez l'application : `npm start`
-
-Assurez-vous d'avoir Node.js et npm installés localement.
+- Création d'une vente : Les utilisateurs peuvent créer une vente en spécifiant la cryptomonnaie, le prix et la quantité souhaitée.
+- Liste des ventes : Les ventes disponibles sont affichées dans une liste, triées par prix croissant.
+- Achat d'une cryptomonnaie : Les utilisateurs peuvent acheter une cryptomonnaie en sélectionnant une vente et en effectuant la transaction correspondante.
+- Confirmation de la transaction : Une fois la transaction d'achat effectuée, la vente est confirmée et retirée de la liste des ventes.
 
 ## Technologies utilisées
 
 - Vue.js : framework JavaScript pour la construction de l'interface utilisateur
 - Web3.js : bibliothèque JavaScript pour interagir avec Ethereum et MetaMask
+- Hardhat : environnement de développement Ethereum pour la compilation, le déploiement et les tests de contrats intelligents
 - HTML/CSS : langages de base pour la structure et la présentation de l'application
+
+
+Assurez-vous d'avoir MetaMask installé et configuré avec un compte Ethereum de test pour effectuer des transactions sur la blockchain.
 
 
 # DEX
