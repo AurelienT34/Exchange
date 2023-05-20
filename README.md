@@ -1,4 +1,4 @@
-# Projet de vente de cryptomonnaies :fr:
+# Projet de vente de cryptomonnaies 🇫🇷
 
 Ce projet est une plateforme de vente de cryptomonnaies pair-à-pair (P2P). Il permet aux utilisateurs d'acheter et de vendre des cryptomonnaies directement entre eux, sans passer par une plateforme d'échange centralisée.
 
@@ -20,7 +20,7 @@ Ce projet est une plateforme de vente de cryptomonnaies pair-à-pair (P2P). Il p
 Assurez-vous d'avoir MetaMask installé et configuré avec un compte Ethereum de test pour effectuer des transactions sur la blockchain.
 
 
-# Cryptocurrency Marketplace Project
+# Cryptocurrency Marketplace Project 🏴󠁧󠁢󠁥󠁮󠁧󠁿
 This project is a peer-to-peer (P2P) cryptocurrency marketplace platform. It allows users to buy and sell cryptocurrencies directly between each other, without relying on a centralized exchange platform.
 
 ## Features
