@@ -1,4 +1,4 @@
-# Projet de vente de cryptomonnaies
+# Projet de vente de cryptomonnaies :fr:
 
 Ce projet est une plateforme de vente de cryptomonnaies pair-à-pair (P2P). Il permet aux utilisateurs d'acheter et de vendre des cryptomonnaies directement entre eux, sans passer par une plateforme d'échange centralisée.
 
