@@ -20,6 +20,23 @@ Ce projet est une plateforme de vente de cryptomonnaies pair-à-pair (P2P). Il p
 Assurez-vous d'avoir MetaMask installé et configuré avec un compte Ethereum de test pour effectuer des transactions sur la blockchain.
 
 
+# Cryptocurrency Marketplace Project
+This project is a peer-to-peer (P2P) cryptocurrency marketplace platform. It allows users to buy and sell cryptocurrencies directly between each other, without relying on a centralized exchange platform.
+
+## Features
+- Create a Sale: Users can create a sale by specifying the cryptocurrency, price, and desired quantity.
+- List of Sales: Available sales are displayed in a list, sorted in ascending order by price.
+- Purchase Cryptocurrency: Users can purchase a cryptocurrency by selecting a sale and completing the corresponding transaction.
+- Transaction Confirmation: Once the purchase transaction is completed, the sale is confirmed and removed from the list of sales.
+
+## Technologies Used
+- Vue.js: JavaScript framework for building the user interface
+- Web3.js: JavaScript library for interacting with Ethereum and MetaMask
+- Hardhat: Ethereum development environment for contract compilation, deployment, and testing
+- HTML/CSS: Core languages for structuring and styling the application
+- Make sure to have MetaMask installed and configured with a test Ethereum account to perform transactions on the blockchain.
+
+
 # DEX
 
 This template should help get you started developing with Vue 3 in Vite.
