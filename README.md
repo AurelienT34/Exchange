@@ -37,6 +37,9 @@ This project is a peer-to-peer (P2P) cryptocurrency marketplace platform. It all
 - Make sure to have MetaMask installed and configured with a test Ethereum account to perform transactions on the blockchain.
 
 
+![image](https://github.com/AurelienT34/Solidity/assets/47206310/4538117d-2aaf-46d4-9f14-8c7f25f5137e)
+
+
 # DEX
 
 This template should help get you started developing with Vue 3 in Vite.
