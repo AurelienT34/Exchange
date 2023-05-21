@@ -83,7 +83,7 @@ npx hardhat node
 npx hardhat compile
 ```
 
-### Hardhat deploy
+### Hardhat deploy on localhost
 
 ```sh
 npx hardhat run scripts/deploy.js --network localhost
