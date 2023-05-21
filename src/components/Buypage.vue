@@ -8,7 +8,8 @@ export default {
         crypto: '',
         prix: 0,
       },
-      achats: [],
+      achats: [], // Contient toutes les propositions d'achats
+      adresseWallet: null, // Variable pour stocker l'adresse du wallet actuellement connecté
     };
   },
   computed: {
@@ -24,6 +25,7 @@ export default {
 
             const accounts = await web3.eth.getAccounts();
             const adresseVendeur = accounts[0];
+            this.adresseWallet = accounts[0];
 
             // Vérifier le solde du compte du vendeur
             const soldeWei = await web3.eth.getBalance(adresseVendeur);
@@ -130,23 +132,35 @@ export default {
     });
 
     console.log('Transaction hash:', transaction.transactionHash);
+    this.supprimerTicket(id);
 
-    const index = this.achats.findIndex(achat => achat.id === id);
-    if (index !== -1) {
-        this.achats.splice(index, 1);
-  }
   } catch (error) {
     console.error('Erreur de transaction:', error);
   }
     },
-},
+    async supprimerTicket(id) {
+  try {
+    const web3 = new Web3(window.ethereum);
+    await window.ethereum.enable();
+    const accounts = await web3.eth.getAccounts();
+    this.adresseWallet = accounts[0];
+
+    const index = this.achats.findIndex(achat => achat.id === id);
+    if (index !== -1 && this.achats[index].vendeur === this.adresseWallet) {
+        this.achats.splice(index, 1);
+    }
+  } catch (error) {
+    console.error('Erreur supression:', error);
+  }
+ },
+  },
 };
 </script>
   
 
 <template>
     <div>
-      <h2>Ajouter une offre d'achat de crypto</h2>
+      <h2>Add a buy offer</h2>
       <form @submit.prevent="ajouterAchat">
         <div class="form-container">
   <div class="form-group">
@@ -157,7 +171,7 @@ export default {
     </select>
   </div>
   <div class="form-group">
-    <label class="label" for="prix">Prix :</label>
+    <label class="label" for="prix">Price :</label>
     <input class="input" type="number" id="prix" v-model="nouvelleAchat.prix" required>
   </div>
   <div class="form-group">
@@ -171,10 +185,11 @@ export default {
 
       </form>
   
-      <h2>Liste des offres d'achat</h2>
+      <h2>Buy Offers</h2>
       <div class="achats-liste">
         <div v-for="achat in achatsTriees" :key="achat.id" class="achat-ticket">
           <img :src="getLogoCrypto(achat.crypto)" :alt="achat.crypto" class="crypto-logo">
+          <div class="close-btn" @click="supprimerTicket(achat.id)" v-if="achat.vendeur === adresseWallet">&#10006;</div>
           <div class="ticket-info">
             <div class="pair">{{ achat.crypto }}/USDT</div>
             <div class="prix">Price : {{ achat.prix }} $</div>
@@ -238,12 +253,22 @@ export default {
   }
   
   .achat-ticket {
+    position: relative;
     display: flex;
     align-items: center;
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ccc;
   }
+
+  .close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  color: red;
+  cursor: pointer;
+}
   
   .crypto-logo {
     width: 50px;

@@ -8,7 +8,8 @@ export default {
         crypto: '',
         prix: 0,
       },
-      ventes: [],
+      ventes: [], // contient toutes les propositions de ventes
+      adresseWallet: null, // Variable pour stocker l'adresse du wallet actuellement connecté
     };
   },
   computed: {
@@ -24,6 +25,7 @@ export default {
 
             const accounts = await web3.eth.getAccounts();
             const adresseVendeur = accounts[0];
+            this.adresseWallet = accounts[0];
 
             // Vérifier le solde du compte du vendeur
             const soldeWei = await web3.eth.getBalance(adresseVendeur);
@@ -57,6 +59,7 @@ export default {
                     this.nouvelleVente.prix = 0;
                     this.nouvelleVente.quantite = 0;
                 })
+
                 .catch((error) => {
                 console.error('Erreur de connexion à MetaMask:', error);
                 });
@@ -130,15 +133,27 @@ export default {
     });
 
     console.log('Transaction hash:', transaction.transactionHash);
-
-    const index = this.ventes.findIndex(vente => vente.id === id);
-    if (index !== -1) {
-        this.ventes.splice(index, 1);
-  }
+    this.supprimerTicket(id);
+    
   } catch (error) {
     console.error('Erreur de transaction:', error);
   }
 },
+ async supprimerTicket(id) {
+  try {
+    const web3 = new Web3(window.ethereum);
+    await window.ethereum.enable();
+    const accounts = await web3.eth.getAccounts();
+    this.adresseWallet = accounts[0];
+
+    const index = this.ventes.findIndex(vente => vente.id === id);
+    if (index !== -1 && this.ventes[index].vendeur === this.adresseWallet) {
+        this.ventes.splice(index, 1);
+  }
+  } catch (error) {
+    console.error('Erreur supression:', error);
+  }
+ },
   },
 };
 </script>
@@ -146,7 +161,7 @@ export default {
 
 <template>
     <div>
-      <h2>Ajouter une vente de crypto</h2>
+      <h2>Add a sales offer</h2>
       <form @submit.prevent="ajouterVente">
         <div class="form-container">
   <div class="form-group">
@@ -157,7 +172,7 @@ export default {
     </select>
   </div>
   <div class="form-group">
-    <label class="label" for="prix">Prix :</label>
+    <label class="label" for="prix">Price :</label>
     <input class="input" type="number" id="prix" v-model="nouvelleVente.prix" required>
   </div>
   <div class="form-group">
@@ -171,9 +186,10 @@ export default {
 
       </form>
   
-      <h2>Liste des ventes</h2>
+      <h2>Sells List</h2>
       <div class="ventes-liste">
         <div v-for="vente in ventesTriees" :key="vente.id" class="vente-ticket">
+          <div class="close-btn" @click="supprimerTicket(vente.id)" v-if="vente.vendeur === adresseWallet">&#10006;</div>
           <img :src="getLogoCrypto(vente.crypto)" :alt="vente.crypto" class="crypto-logo">
           <div class="ticket-info">
             <div class="pair">{{ vente.crypto }}/USDT</div>
@@ -237,12 +253,22 @@ export default {
   }
   
   .vente-ticket {
+    position: relative;
     display: flex;
     align-items: center;
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ccc;
   }
+
+  .close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  color: red;
+  cursor: pointer;
+}
   
   .crypto-logo {
     width: 50px;
