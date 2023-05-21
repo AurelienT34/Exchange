@@ -42,7 +42,7 @@
         <SellPage/>
       </div>
 
-      <div v-show="activeTab === 'spot'">
+      <div v-if="activeTab === 'spot'">
         <h2>Spot Section</h2>
         <!-- Contenu de la section Spot -->
         <Spot/>

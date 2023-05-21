@@ -13,9 +13,15 @@ contract Wallet {
     
     mapping(address => Balance) Wallets;
 
-    function withdrawMoney(address payable _to, uint _amount) external {
-        require(_amount <= Wallets[msg.sender].ethAmount, "Not enought funds");
+    function withdrawETH(address payable _to, uint _amount) external {
+        require(_amount <= Wallets[msg.sender].ethAmount, "Not enought eth");
         Wallets[msg.sender].ethAmount -= _amount;
+        _to.transfer(_amount);
+    }
+
+    function withdrawUSDT(address payable _to, uint _amount) external {
+        require(_amount <= Wallets[msg.sender].usdtAmount, "Not enought usdt");
+        Wallets[msg.sender].usdtAmount -= _amount;
         _to.transfer(_amount);
     }
 
