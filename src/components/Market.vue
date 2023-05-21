@@ -1,6 +1,7 @@
 <script>
   import BuyPage from './Buypage.vue'
   import SellPage from './Sellpage.vue'
+  import Spot from './Spot.vue'
 
   export default {
     data() {
@@ -10,7 +11,8 @@
     },
     components: {
         BuyPage,
-        SellPage
+        SellPage,
+        Spot,
     },
     methods: {
       changeTab(tab) {
@@ -25,6 +27,7 @@
       <div class="tabs">
         <button :class="{ active: activeTab === 'buy' }" @click="changeTab('buy')">Buy (P2P)</button>
         <button :class="{ active: activeTab === 'sell' }" @click="changeTab('sell')">Sell (P2P)</button>
+        <button :class="{ active: activeTab === 'SPOT' }" @click="changeTab('spot')">Spot</button>
       </div>
   
       <div v-show="activeTab === 'buy'">
@@ -38,6 +41,13 @@
         <!-- Contenu de la section Vente -->
         <SellPage/>
       </div>
+
+      <div v-show="activeTab === 'spot'">
+        <h2>Spot Section</h2>
+        <!-- Contenu de la section Spot -->
+        <Spot/>
+      </div>
+
     </div>
   </template>
 
