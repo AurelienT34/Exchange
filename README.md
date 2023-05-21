@@ -77,3 +77,14 @@ npm run build
 ```sh
 npx hardhat node
 ```
+### hardhat compile contracts
+
+```sh
+npx hardhat compile
+```
+
+### Hardhat deploy
+
+```sh
+npx hardhat run scripts/deploy.js --network localhost
+```
