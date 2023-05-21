@@ -71,3 +71,9 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Hardhat node
+
+```sh
+npx hardhat node
+```
