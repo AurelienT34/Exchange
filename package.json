@@ -8,8 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "chart.js": "^4.3.0",
+    "chartjs": "^0.3.24",
     "ethers": "^5.4.0",
-    "vue": "^3.3.2"
+    "vue": "^3.3.2",
+    "vue-chartjs": "^5.2.0"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
