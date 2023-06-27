@@ -24,36 +24,49 @@ export default {
     return {
       chartData: {
         labels: ['January', 'February', 'March'],
-        datasets: [
-          {
-            label: 'ETH price',
-            backgroundColor: 'green',
-            data: [40, 20, 12],
-            borderColor: 'green'
-          }
-        ]
+        datasets: [{
+          label: 'ETH price',
+          backgroundColor: 'green',
+          data: [40, 20, 12],
+          borderColor: 'green'
+        }]
       },
       chartOptions: {
         responsive: true
       },
-      chartKey: 0 // Ajout de la clé de graphique
+      chartKey: 0
     }
   },
-
   methods: {
     updateChartData() {
-      const newLabel = 'April';
-      const newData = 25;
+      const newLabels = [...this.chartData.labels]; // Créer une copie des labels existants
+      const newData = [...this.chartData.datasets[0].data]; // Créer une copie des données existantes
 
-      this.chartData.labels = [...this.chartData.labels, newLabel];
-      this.chartData.datasets[0].data = [...this.chartData.datasets[0].data, newData];
-      console.log(this.chartData.labels);
-      console.log(this.chartData.datasets[0].data);
-      this.chartKey++; // Mise à jour de la clé de graphique pour forcer la mise à jour du composant
+      newLabels.push('April');
+      newData.push(25);
+
+      // Vérifier si le nombre de données dépasse 5 et les ajuster si nécessaire
+      if (newLabels.length > 5) {
+        newLabels.shift(); // Supprimer la première valeur
+        newData.shift(); // Supprimer la première valeur
+      }
+
+      this.chartData = {
+        labels: newLabels,
+        datasets: [{
+          label: 'ETH price',
+          backgroundColor: 'green',
+          data: newData,
+          borderColor: 'green'
+        }]
+      };
+
+      this.chartKey++;
     }
-  }
+  },
 }
 </script>
+
 
 <style>
 #my-chart-id {
