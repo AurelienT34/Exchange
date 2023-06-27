@@ -39,16 +39,16 @@ export default {
   },
   methods: {
     updateChartData() {
-      const newLabels = [...this.chartData.labels]; // Créer une copie des labels existants
-      const newData = [...this.chartData.datasets[0].data]; // Créer une copie des données existantes
+      const newLabels = [...this.chartData.labels]; // Create a copy of the existing labels
+      const newData = [...this.chartData.datasets[0].data]; // Create a copy of the existing data
 
       newLabels.push('April');
       newData.push(25);
 
-      // Vérifier si le nombre de données dépasse 5 et les ajuster si nécessaire
+      // Check if the number of data exceeds 5 and adjust if necessary
       if (newLabels.length > 5) {
-        newLabels.shift(); // Supprimer la première valeur
-        newData.shift(); // Supprimer la première valeur
+        newLabels.shift(); // Remove the first value
+        newData.shift(); // Remove the first value
       }
 
       this.chartData = {
