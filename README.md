@@ -96,6 +96,8 @@ Note: I used the ethers and web3.js libraries to observe the similarities and di
 
 # DEX
 ![image](https://github.com/AurelienT34/Solidity/assets/47206310/0992e850-d7ba-4983-8235-8e9c2135d500)
+![image](https://github.com/AurelienT34/Solidity/assets/47206310/34cb77e3-bc15-4530-bd16-cf57d5b9be9b)
+
 
 ## Project Setup
 
