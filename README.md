@@ -12,6 +12,7 @@ Ce projet est une plateforme de vente de cryptomonnaies pair-à-pair (P2P). Il p
 ## Technologies utilisées
 
 - Vue.js : framework JavaScript pour la construction de l'interface utilisateur
+- ethers : bibliothèque JavaScript pour interagir avec Ethereum et MetaMask
 - Web3.js : bibliothèque JavaScript pour interagir avec Ethereum et MetaMask
 - Hardhat : environnement de développement Ethereum pour la compilation, le déploiement et les tests de contrats intelligents
 - HTML/CSS : langages de base pour la structure et la présentation de l'application
