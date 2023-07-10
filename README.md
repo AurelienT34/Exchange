@@ -94,11 +94,9 @@ Note: I used the ethers and web3.js libraries to observe the similarities and di
 
 # CEX
 ![image](https://github.com/AurelienT34/Solidity/assets/47206310/f03cc703-21ad-48f3-b4fd-2b46a4e0f7ae)
-![image](https://github.com/AurelienT34/Solidity/assets/47206310/65c2e858-070f-4884-89c3-cb4ee83bcf3d)
 
 
 # DEX
-![image](https://github.com/AurelienT34/Solidity/assets/47206310/dca94632-0ee3-44f3-a0ff-13d621edadb7) 
 ![image](https://github.com/AurelienT34/Solidity/assets/47206310/85378c6f-6ce2-4e57-9507-902d5b9be07d)
 ![image](https://github.com/AurelienT34/Solidity/assets/47206310/fe011c83-31af-4dc2-b17e-60f9775efa21)
 
