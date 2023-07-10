@@ -1,3 +1,16 @@
+<template>
+  <div>
+    <!-- Home Page -->
+    <div class="HomePage" v-if="!isConnected">
+      <h1>Welcome to the Home Page</h1>
+      <p>Connect your Metamask wallet to start buying and selling cryptocurrencies.</p>
+      <button v-if="!isConnected" @click="connectMetamask">Connect Metamask</button>
+    </div>
+    <!-- Market Component -->
+    <Market v-if="isConnected" />
+  </div>
+</template>
+
 <script>
 import Market from './Market.vue'
 
@@ -11,7 +24,7 @@ export default {
     Market
   },
   methods: {
-
+    // Connect to Metamask
     async connectMetamask() {
       if (window.ethereum) {
         try {
@@ -25,6 +38,7 @@ export default {
       }
     },
 
+    // Check Metamask connection
     checkMetamaskConnection() {
       if (window.ethereum && window.ethereum.selectedAddress) {
         this.isConnected = true;
@@ -33,22 +47,8 @@ export default {
   },
 
   mounted() {
+    // Check Metamask connection on component mount
     this.checkMetamaskConnection();
   },
-
 };
-
 </script>
-
-
-<template>
-  <div>
-    <div class="HomePage" v-if="!isConnected">
-      <h1>Bienvenue sur la page d'accueil</h1>
-      <p>Connectez votre portefeuille Metamask pour commencer à acheter et vendre des crypto-monnaies.</p>
-     <button v-if="!isConnected" @click="connectMetamask">Connecter Metamask</button>
-    </div>
-    <Market v-if="isConnected"/>
-</div>
-  
-</template>

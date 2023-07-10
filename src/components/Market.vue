@@ -10,11 +10,12 @@
       };
     },
     components: {
-        BuyPage,
-        SellPage,
-        Spot,
+      BuyPage,
+      SellPage,
+      Spot,
     },
     methods: {
+      // Change the active tab
       changeTab(tab) {
         this.activeTab = tab;
       },
@@ -23,33 +24,39 @@
 </script>
   
 <template>
-    <div>
-      <div class="tabs">
-        <button :class="{ active: activeTab === 'buy' }" @click="changeTab('buy')">Buy (P2P)</button>
-        <button :class="{ active: activeTab === 'sell' }" @click="changeTab('sell')">Sell (P2P)</button>
-        <button :class="{ active: activeTab === 'SPOT' }" @click="changeTab('spot')">Spot</button>
-      </div>
-  
-      <div v-show="activeTab === 'buy'">
-        <h2>Buy Section</h2>
-        <!-- Contenu de la section Achat -->
-        <BuyPage/>
-      </div>
-  
-      <div v-show="activeTab === 'sell'">
-        <h2>Sell Section</h2>
-        <!-- Contenu de la section Vente -->
-        <SellPage/>
-      </div>
-
-      <div v-if="activeTab === 'spot'">
-        <h2>Spot Section</h2>
-        <!-- Contenu de la section Spot -->
-        <Spot/>
-      </div>
-
+  <div>
+    <div class="tabs">
+      <!-- Buy tab -->
+      <button :class="{ active: activeTab === 'buy' }" @click="changeTab('buy')">Buy (P2P)</button>
+      <!-- Sell tab -->
+      <button :class="{ active: activeTab === 'sell' }" @click="changeTab('sell')">Sell (P2P)</button>
+      <!-- Spot tab -->
+      <button :class="{ active: activeTab === 'SPOT' }" @click="changeTab('spot')">Spot</button>
     </div>
-  </template>
+
+    <!-- Buy section -->
+    <div v-show="activeTab === 'buy'">
+      <h2>Buy Section</h2>
+      <!-- Content of the Buy section -->
+      <BuyPage/>
+    </div>
+
+    <!-- Sell section -->
+    <div v-show="activeTab === 'sell'">
+      <h2>Sell Section</h2>
+      <!-- Content of the Sell section -->
+      <SellPage/>
+    </div>
+
+    <!-- Spot section -->
+    <div v-show="activeTab === 'spot'">
+      <h2>Spot Section</h2>
+      <!-- Content of the Spot section -->
+      <Spot/>
+    </div>
+
+  </div>
+</template>
 
 <style>
 .tabs {

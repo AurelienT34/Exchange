@@ -8,8 +8,8 @@ export default {
         crypto: '',
         prix: 0,
       },
-      achats: [], // Contient toutes les propositions d'achats
-      adresseWallet: null, // Variable pour stocker l'adresse du wallet actuellement connecté
+      achats: [], // Contains all buy proposals
+      adresseWallet: null, // Variable to store the currently connected wallet address
     };
   },
   computed: {
@@ -18,57 +18,60 @@ export default {
     },
   },
   methods: {
+    // Add a buy proposal
     async ajouterAchat() {
-        try {
-            const web3 = new Web3(window.ethereum);
-            await window.ethereum.enable();
+      try {
+        const web3 = new Web3(window.ethereum);
+        await window.ethereum.enable();
 
-            const accounts = await web3.eth.getAccounts();
-            const adresseVendeur = accounts[0];
-            this.adresseWallet = accounts[0];
+        const accounts = await web3.eth.getAccounts();
+        const adresseVendeur = accounts[0];
+        this.adresseWallet = accounts[0];
 
-            // Vérifier le solde du compte du vendeur
-            const soldeWei = await web3.eth.getBalance(adresseVendeur);
-            const soldeEth = web3.utils.fromWei(soldeWei, 'ether');
+        // Check the seller's account balance
+        const soldeWei = await web3.eth.getBalance(adresseVendeur);
+        const soldeEth = web3.utils.fromWei(soldeWei, 'ether');
 
-            // Convertir le prix en nombre et vérifier si l'acheteur possède suffisamment d'ETH
-            const prixEth = parseFloat(this.nouvelleAchat.prix);
-            if (isNaN(prixEth) || prixEth <= 0) {
-             throw new Error("Le prix n'est pas un nombre valide");
-            }
+        // Convert the price to a number and check if the buyer has enough ETH
+        const prixEth = parseFloat(this.nouvelleAchat.prix);
+        if (isNaN(prixEth) || prixEth <= 0) {
+          throw new Error("Le prix n'est pas un nombre valide");
+        }
 
-            if (parseFloat(soldeEth) < parseFloat(this.nouvelleAchat.quantite)) {
-            throw new Error("L'acheteur ne possède pas suffisamment d'ETH");
-            }
-                if (typeof web3 !== 'undefined') {
-                    web3.eth.requestAccounts()
-                        .then((accounts) => {
-                    const adresseWallet = accounts[0]; // Adresse du wallet connecté
-                    const id = Date.now();
-  
-                this.achats.push({
-                    id,
-                    crypto: this.nouvelleAchat.crypto,
-                    prix: this.nouvelleAchat.prix,
-                    quantite: this.nouvelleAchat.quantite,
-                    vendeur: adresseWallet,
-                    date: new Date(),
-                    });
-  
-                    this.nouvelleAchat.crypto = '';
-                    this.nouvelleAchat.prix = 0;
-                    this.nouvelleAchat.quantite = 0;
-                })
-                .catch((error) => {
-                console.error('Erreur de connexion à MetaMask:', error);
-                });
-                } else {
-                    console.error('MetaMask non détecté');
-            }
-        }catch (error) {
-            console.error('Erreur lors de la création de l achat:', error);
-  }
+        if (parseFloat(soldeEth) < parseFloat(this.nouvelleAchat.quantite)) {
+          throw new Error("L'acheteur ne possède pas suffisamment d'ETH");
+        }
+
+        if (typeof web3 !== 'undefined') {
+          web3.eth.requestAccounts()
+            .then((accounts) => {
+              const adresseWallet = accounts[0]; // Connected wallet address
+              const id = Date.now();
+
+              this.achats.push({
+                id,
+                crypto: this.nouvelleAchat.crypto,
+                prix: this.nouvelleAchat.prix,
+                quantite: this.nouvelleAchat.quantite,
+                vendeur: adresseWallet,
+                date: new Date(),
+              });
+
+              this.nouvelleAchat.crypto = '';
+              this.nouvelleAchat.prix = 0;
+              this.nouvelleAchat.quantite = 0;
+            })
+            .catch((error) => {
+              console.error('Erreur de connexion à MetaMask:', error);
+            });
+        } else {
+          console.error('MetaMask non détecté');
+        }
+      } catch (error) {
+        console.error('Erreur lors de la création de l achat:', error);
+      }
     },
+    // Get the logo of the crypto
     getLogoCrypto(crypto) {
       if (crypto === 'BTC') {
         return 'https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg';
@@ -78,6 +81,7 @@ export default {
         return '';
       }
     },
+    // Format the date
     formatDate(date) {
       const options = {
         year: 'numeric',
@@ -89,119 +93,121 @@ export default {
       };
       return date.toLocaleString('fr-FR', options);
     },
-    //-------------BUY----------------
-    async VendreSaCrypto(id,prix, adresseVendeur, montantEth) {
-        try {
-    const web3 = new Web3(window.ethereum);
-    await window.ethereum.enable();
+    // Sell Crypto
+    async VendreSaCrypto(id, prix, adresseVendeur, montantEth) {
+      try {
+        const web3 = new Web3(window.ethereum);
+        await window.ethereum.enable();
 
-    const accounts = await web3.eth.getAccounts();
-    const adresseAcheteur = accounts[0];
-    const montantWei = web3.utils.toWei((prix * montantEth).toString(), 'ether');
+        const accounts = await web3.eth.getAccounts();
+        const adresseAcheteur = accounts[0];
+        const montantWei = web3.utils.toWei((prix * montantEth).toString(), 'ether');
 
-    const transaction = await web3.eth.sendTransaction({
-      from: adresseAcheteur,
-      to: adresseVendeur,
-      value: montantWei,
-    });
+        const transaction = await web3.eth.sendTransaction({
+          from: adresseAcheteur,
+          to: adresseVendeur,
+          value: montantWei,
+        });
 
-    console.log('Transaction hash:', transaction.transactionHash);
-    const confirmation = await web3.eth.getTransactionReceipt(transaction.transactionHash);
-    if (confirmation && confirmation.status) {
-      // La transaction d'achat est confirmée, déclencher l'achat
-      this.acheterCrypto(id,adresseAcheteur,adresseVendeur,montantEth);
-    } else {
-      console.error('La transaction d\'achat a échoué');
-    }
-  } catch (error) {
-    console.error('Erreur de transaction:', error);
-  }
+        console.log('Transaction hash:', transaction.transactionHash);
+        const confirmation = await web3.eth.getTransactionReceipt(transaction.transactionHash);
+        if (confirmation && confirmation.status) {
+          // The buy transaction is confirmed, trigger the purchase
+          this.acheterCrypto(id, adresseAcheteur, adresseVendeur, montantEth);
+        } else {
+          console.error('La transaction d\'achat a échoué');
+        }
+      } catch (error) {
+        console.error('Erreur de transaction:', error);
+      }
     },
 
-    //------------------------SELL----------------
-    async acheterCrypto(id,adresseAcheteur,adresseVendeur,montantEth) {
-  try {
-    const web3 = new Web3(window.ethereum);
-    await window.ethereum.enable();
-    const montantWei = web3.utils.toWei(montantEth.toString(), 'ether');
+    // Buy Crypto
+    async acheterCrypto(id, adresseAcheteur, adresseVendeur, montantEth) {
+      try {
+        const web3 = new Web3(window.ethereum);
+        await window.ethereum.enable();
+        const montantWei = web3.utils.toWei(montantEth.toString(), 'ether');
 
-    const transaction = await web3.eth.sendTransaction({
-      from: adresseAcheteur,
-      to: adresseVendeur, // Remplacez par l'adresse de l'acheteur
-      value: montantWei,
-    });
+        const transaction = await web3.eth.sendTransaction({
+          from: adresseAcheteur,
+          to: adresseVendeur, // Replace with the buyer's address
+          value: montantWei,
+        });
 
-    console.log('Transaction hash:', transaction.transactionHash);
-    this.supprimerTicket(id);
+        console.log('Transaction hash:', transaction.transactionHash);
+        this.supprimerTicket(id);
 
-  } catch (error) {
-    console.error('Erreur de transaction:', error);
-  }
+      } catch (error) {
+        console.error('Erreur de transaction:', error);
+      }
     },
+
+    // Remove a ticket
     async supprimerTicket(id) {
-  try {
-    const web3 = new Web3(window.ethereum);
-    await window.ethereum.enable();
-    const accounts = await web3.eth.getAccounts();
-    this.adresseWallet = accounts[0];
+      try {
+        const web3 = new Web3(window.ethereum);
+        await window.ethereum.enable();
+        const accounts = await web3.eth.getAccounts();
+        this.adresseWallet = accounts[0];
 
-    const index = this.achats.findIndex(achat => achat.id === id);
-    if (index !== -1 && this.achats[index].vendeur === this.adresseWallet) {
-        this.achats.splice(index, 1);
-    }
-  } catch (error) {
-    console.error('Erreur supression:', error);
-  }
- },
+        const index = this.achats.findIndex(achat => achat.id === id);
+        if (index !== -1 && this.achats[index].vendeur === this.adresseWallet) {
+          this.achats.splice(index, 1);
+        }
+      } catch (error) {
+        console.error('Erreur suppression:', error);
+      }
+    },
   },
 };
 </script>
+
   
 
 <template>
-    <div>
-      <h2>Add a buy offer</h2>
-      <form @submit.prevent="ajouterAchat">
-        <div class="form-container">
-  <div class="form-group">
-    <label class="label" for="crypto">Crypto :</label>
-    <select class="input" id="crypto" v-model="nouvelleAchat.crypto" required>
-      <option value="BTC">BTC</option>
-      <option value="ETH">ETH</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label class="label" for="prix">Price :</label>
-    <input class="input" type="number" id="prix" v-model="nouvelleAchat.prix" required>
-  </div>
-  <div class="form-group">
-    <label class="label" for="quantite">Quantity :</label>
-    <input class="input" type="number" id="quantite" v-model="nouvelleAchat.quantite" required step="0.00000001">
-  </div>
-  <div class="form-group">
-    <button class="button" type="submit">Buy</button>
-  </div>
-</div>
+  <div>
+    <h2>Add a buy offer</h2>
+    <form @submit.prevent="ajouterAchat">
+      <div class="form-container">
+        <div class="form-group">
+          <label class="label" for="crypto">Crypto:</label>
+          <select class="input" id="crypto" v-model="nouvelleAchat.crypto" required>
+            <option value="BTC">BTC</option>
+            <option value="ETH">ETH</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="label" for="prix">Price:</label>
+          <input class="input" type="number" id="prix" v-model="nouvelleAchat.prix" required>
+        </div>
+        <div class="form-group">
+          <label class="label" for="quantite">Quantity:</label>
+          <input class="input" type="number" id="quantite" v-model="nouvelleAchat.quantite" required step="0.00000001">
+        </div>
+        <div class="form-group">
+          <button class="button" type="submit">Buy</button>
+        </div>
+      </div>
+    </form>
 
-      </form>
-  
-      <h2>Buy Offers</h2>
-      <div class="achats-liste">
-        <div v-for="achat in achatsTriees" :key="achat.id" class="achat-ticket">
-          <img :src="getLogoCrypto(achat.crypto)" :alt="achat.crypto" class="crypto-logo">
-          <div class="close-btn" @click="supprimerTicket(achat.id)" v-if="achat.vendeur === adresseWallet">&#10006;</div>
-          <div class="ticket-info">
-            <div class="pair">{{ achat.crypto }}/USDT</div>
-            <div class="prix">Price : {{ achat.prix }} $</div>
-            <div class="quantite">Quantity : {{ achat.quantite }}</div>
-            <div class="total_price">Total value : {{ achat.quantite * achat.prix }} $</div>
-            <div class="date">{{ formatDate(achat.date) }}</div>
-            <button @click="VendreSaCrypto(achat.id, achat.prix, achat.vendeur, achat.quantite)">SELL</button>
-          </div>
+    <h2>Buy Offers</h2>
+    <div class="achats-liste">
+      <div v-for="achat in achatsTriees" :key="achat.id" class="achat-ticket">
+        <img :src="getLogoCrypto(achat.crypto)" :alt="achat.crypto" class="crypto-logo">
+        <div class="close-btn" @click="supprimerTicket(achat.id)" v-if="achat.vendeur === adresseWallet">&#10006;</div>
+        <div class="ticket-info">
+          <div class="pair">{{ achat.crypto }}/USDT</div>
+          <div class="prix">Price: {{ achat.prix }} $</div>
+          <div class="quantite">Quantity: {{ achat.quantite }}</div>
+          <div class="total_price">Total value: {{ achat.quantite * achat.prix }} $</div>
+          <div class="date">{{ formatDate(achat.date) }}</div>
+          <button @click="VendreSaCrypto(achat.id, achat.prix, achat.vendeur, achat.quantite)">SELL</button>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
 
 
 
@@ -291,4 +297,3 @@ export default {
     color: #888;
   }
   </style>
-  
