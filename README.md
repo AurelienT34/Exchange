@@ -39,6 +39,7 @@ Pour utiliser cette partie de la plateforme, les utilisateurs doivent déposer l
 - Web3.js : bibliothèque JavaScript pour interagir avec Ethereum et MetaMask
 - Hardhat : environnement de développement Ethereum pour la compilation, le déploiement et les tests de contrats intelligents
 - HTML/CSS : langages de base pour la structure et la présentation de l'application
+- Chart.js : Bibliothèque JavaScript pour créer des graphiques
 
 
 Assurez-vous d'avoir MetaMask installé et configuré avec un compte Ethereum de test pour effectuer des transactions sur la blockchain.
@@ -85,6 +86,7 @@ To use this part of the platform, users need to deposit their ETH or USDT into t
 - Web3.js: JavaScript library for interacting with Ethereum and MetaMask
 - Hardhat: Ethereum development environment for compiling, deploying, and testing smart contracts
 - HTML/CSS: Basic languages for structuring and styling the application
+- chart.js: JavaScript charting library
 
 Make sure you have MetaMask installed and configured with a test Ethereum account to perform transactions on the blockchain.
 
