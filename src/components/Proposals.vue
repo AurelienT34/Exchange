@@ -1,30 +1,6 @@
 <template>
   <div class="order-book">
-    <!-- Ventes column -->
     <div class="proposals-container">
-      <div class="proposals-column vente-column">
-        <h2 class="proposals-title">Ventes</h2>
-        <table class="table vente-table">
-          <thead>
-            <tr>
-              <th>Prix</th>
-              <th>Quantité</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(vente, index) in ventes" :key="'vente-' + index">
-              <td>{{ vente.prix }}</td>
-              <td>{{ vente.quantite }}</td>
-              <td>{{ vente.prix * vente.quantite }}</td>
-              <td>
-                <button @click="removeVente(index)">Buy</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
       <!-- Achats column -->
       <div class="proposals-column achat-column">
         <h2 class="proposals-title">Achats</h2>
@@ -48,6 +24,31 @@
           </tbody>
         </table>
       </div>
+
+      <!-- Ventes column -->
+      <div class="proposals-column vente-column">
+        <h2 class="proposals-title">Ventes</h2>
+        <table class="table vente-table">
+          <thead>
+            <tr>
+              <th>Prix</th>
+              <th>Quantité</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(vente, index) in ventes" :key="'vente-' + index">
+              <td>{{ vente.prix }}</td>
+              <td>{{ vente.quantite }}</td>
+              <td>{{ vente.prix * vente.quantite }}</td>
+              <td>
+                <button @click="removeVente(index)">Buy</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
 </template>
