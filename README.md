@@ -32,6 +32,7 @@ This project is a peer-to-peer (P2P) cryptocurrency marketplace platform. It all
 
 ## Technologies Used
 - Vue.js: JavaScript framework for building the user interface
+- ethers : JavaScript library for interacting with Ethereum and MetaMask
 - Web3.js: JavaScript library for interacting with Ethereum and MetaMask
 - Hardhat: Ethereum development environment for contract compilation, deployment, and testing
 - HTML/CSS: Core languages for structuring and styling the application
