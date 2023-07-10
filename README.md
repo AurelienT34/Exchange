@@ -2,7 +2,7 @@
 
 Ce projet comporte deux parties :
 
- ##Partie 1 : Plateforme de Vente de Cryptomonnaies DEX (P2P)
+ ## Partie 1 : Plateforme de Vente de Cryptomonnaies DEX (P2P)
  
 La première partie de ce projet est une plateforme de vente de cryptomonnaies pair-à-pair (P2P). Elle permet aux utilisateurs d'acheter et de vendre des cryptomonnaies directement entre eux, sans passer par une plateforme d'échange centralisée.
 
@@ -15,7 +15,7 @@ La première partie de ce projet est une plateforme de vente de cryptomonnaies p
 - Confirmation de la transaction : Une fois la transaction d'achat effectuée, la vente est confirmée et retirée de la liste des ventes.
 
 
-##Partie 2 : Plateforme de Vente de Cryptomonnaies CEX
+## Partie 2 : Plateforme de Vente de Cryptomonnaies CEX
 
 La seconde partie de ce projet est une plateforme centralisée qui propose un graphique montrant l'évolution du prix de l'ETH. Les utilisateurs peuvent ajouter des propositions d'achat et de vente, qui sont ensuite affichées dans le carnet d'ordres. Ces propositions peuvent être tradées en spot, offrant ainsi la possibilité d'acheter ou de vendre de l'ETH en temps réel.
 
