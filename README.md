@@ -97,21 +97,6 @@ Note: I used the ethers and web3.js libraries to observe the similarities and di
 # DEX
 ![image](https://github.com/AurelienT34/Solidity/assets/47206310/0992e850-d7ba-4983-8235-8e9c2135d500)
 
-
-
-
-# DEX
-
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
 ## Project Setup
 
 ```sh
