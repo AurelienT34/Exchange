@@ -93,14 +93,13 @@ Make sure you have MetaMask installed and configured with a test Ethereum accoun
 Note: I used the ethers and web3.js libraries to observe the similarities and differences between the two.
 
 # CEX
-![image](https://github.com/AurelienT34/Solidity/assets/47206310/0c1d8bae-61e2-4162-a4c4-6670a50e577e)
-
+![image](https://github.com/AurelienT34/Solidity/assets/47206310/f03cc703-21ad-48f3-b4fd-2b46a4e0f7ae)
 ![image](https://github.com/AurelienT34/Solidity/assets/47206310/65c2e858-070f-4884-89c3-cb4ee83bcf3d)
 
 
 # DEX
-![image](https://github.com/AurelienT34/Solidity/assets/47206310/dca94632-0ee3-44f3-a0ff-13d621edadb7)
 ![image](https://github.com/AurelienT34/Solidity/assets/47206310/85378c6f-6ce2-4e57-9507-902d5b9be07d)
+![image](https://github.com/AurelienT34/Solidity/assets/47206310/dca94632-0ee3-44f3-a0ff-13d621edadb7)
 ![image](https://github.com/AurelienT34/Solidity/assets/47206310/b9f39d93-ac4c-42ed-ae53-922c7f52cd14)
 
 
